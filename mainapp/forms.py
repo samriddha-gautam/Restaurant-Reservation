@@ -23,3 +23,9 @@ class CustomReservationForm(forms.ModelForm):
             'first_name': 'First Name',
             'last_name': 'Last Name',
         }
+
+class CredentialsForm(forms.Form):
+    email = forms.EmailField()
+
+class OTPForm(forms.Form):
+    otp = forms.CharField(max_length=6)  

@@ -6,4 +6,6 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),  # Optional staff dashboard view
     path('add-reservation/',views.add_reservation,name='add_reservation'),
     path('reservation-success/',views.reservation_success,name='reservation_success'),
+    path('credentials/', views.credentials_view, name='credentials'),
+    path('verify-otp/', views.verify_otp_view, name='verify_otp'),
 ]

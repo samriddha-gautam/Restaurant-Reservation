@@ -24,3 +24,4 @@ class Reservation(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}- {self.date} at {self.time} (Table {self.table.table_number})"
+    
