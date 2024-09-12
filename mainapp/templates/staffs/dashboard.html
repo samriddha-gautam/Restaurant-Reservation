@@ -1,0 +1,28 @@
+
+{% block content %}
+<h1>Staff Dashboard</h1>
+
+<h2>Upcoming Reservations</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Guests</th>
+      <th>Table</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for reservation in reservations %}
+    <tr>
+      <td>{{ reservation.first_name }} {{ reservation.last_name }}</td>
+      <td>{{ reservation.date }}</td>
+      <td>{{ reservation.time }}</td>
+      <td>{{ reservation.num_guests }}</td>
+      <td>{{ reservation.table }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
