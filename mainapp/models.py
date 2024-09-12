@@ -5,6 +5,7 @@ class Table(models.Model):
     
     table_number = models.IntegerField(unique=True)
     capacity = models.PositiveIntegerField(validators=[MinValueValidator(1)])  # Minimum 1 seat
+    is_occupied = models.BooleanField(default=False)
 
     def __str__(self):
         return f"Table #{self.table_number} ({self.capacity} seats)"
