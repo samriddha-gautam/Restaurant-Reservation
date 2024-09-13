@@ -20,7 +20,7 @@ h3{
 /*headers*/
 .header
 {
-	background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(/app1/templates/image/1.jpg);
+	background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(/mainapp/templates/img/1.jpg);
 	height:80vh;
 	background-position:center;
 	background-size:cover;
@@ -28,7 +28,7 @@ h3{
 
 .header2
 {
-	background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(/app1/templates/image/6.jpeg);
+	background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(/mainapp/templates/img/6.jpeg);
 	height:40vh;
 	background-position:center;
 	background-size:cover;
@@ -108,4 +108,22 @@ color:black;
 	border-bottom:2px solid white;
 	margin:0 auto;
 	margin-top:20px;
+}
+.flex-column {
+    max-width: 260px;
+}
+
+.container{
+    background: #f9f9f9;
+}
+
+.gallery{
+    margin: 5px;
+}
+
+.logo{
+    width: 150px;
+    height: 250px;
+    margin-top: 90px;
+    margin-bottom: 40px;
 }

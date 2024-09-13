@@ -4,39 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bernhardt Restaurant</title>
+    <title>Drizzy Restaurant</title>
     <link href="/mainapp/templates/static/css/style.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">     <!--font-awesome-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">  <!--bootstrap-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  <!--googleapis jquery-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  <!--font-awesome-->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>                          <!--bootstrap-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>           <!--bootstrap-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>            <!--bootstrap-->
 </head>
-<style>
-    .flex-column {
-        max-width: 260px;
-    }
-
-    .container{
-        background: #f9f9f9;
-    }
-
-    .image{
-        margin: 5px;
-    }
-
-    .logo image{
-        width: 150px;
-        height: 250px;
-        margin-top: 90px;
-        margin-bottom: 40px;
-    }
-</style>
 <body>
 
         {% extends 'header.html' %}
+        {% block content %}
       <header class="header">
           <div class="row">
               <div class="col-md-12 text-center">
          <a class="logo"><img src="/mainapp/templates/img/logo.png" alt="logo"></a>
          </div>
               <div class="col-md-12 text-center">
-                  <button type="button" onclick="window.location.href='add_reservation.html'" class="btn btn-outline-light btn-lg"><em>Make a Reservation Now!</em></button>
+                  <button type="button" onclick="window.location.href=' add_reservation'" class="btn btn-outline-light btn-lg"><em>Make a Reservation Now!</em></button>
               </div>
           </div>
       </header>
@@ -85,9 +73,9 @@
            <div class="col-sm">
               <div class="arranging"><br><hr>
           <h4 class="text-center">Our Story</h4>
-          <p><br>The restaurant MonkaS, first opened in 2004 in “Psiri”, one of the oldest districts of Athens in the historical center of the city. In 2010 , the restaurant was awarded its first Michelin star and has retained it since.<br><br>
-          The same year, the restaurant relocated to the 6th floor of the Onassis Cultural Centre in Syngrou Avenue and was recently redesigned by award-winning architectural firm Divercity.In warmer months of the year the restaurant moves
-          to the 7th floor of the building, offering a unique outdoor setting with panoramic view of the Acropolis, Lycebettus hill and the city skyline.<br><br><br></p><hr>
+          <p><br>The restaurant Drizzy, first opened in 2081 in “Kalanki”, one of the oldest cities of Kathmandu. In our first year, the restaurant was awarded its first Michelin star and has retained it since.<br><br>
+          The same year, the restaurant relocated to the 4th floor of the Kathmandu Bernhardt College in Bafal and was recently redesigned by award-winning architecture expert Sudip Bohara.In warmer months of the year the restaurant moves
+          to the 5th floor of the building, offering a unique outdoor setting with panoramic view of the historical temple Swayambhu and the beautiful hills.<br><br><br></p><hr>
           </div>
            </div>
           </div><br>
@@ -138,7 +126,7 @@
       <section class="map" id="footer">
           <div class="container">
           <h3 class="text-center"><br><br>Find us!</h3><br>
-              <iframe src="https://www.google.com/maps/embed?pb=!1m21!1m12!1m3!1d3150.1829966583578!2d23.75232003459512!3d37.85600838634192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m6!3e0!4m3!3m2!1d37.8566691!2d23.752137599999998!4m0!5e0!3m2!1sel!2sgr!4v1524459240043" style= "width:100%;  height:250px; border:0;" allowfullscreen></iframe>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.5014556395963!2d85.2806203746241!3d27.701799576185717!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19aca3d8345b%3A0xbbb5e9967c6a23e2!2sKathmandu%20BernHardt%20College!5e0!3m2!1sen!2snp!4v1726232441018!5m2!1sen!2snp" style= "width:100%;  height:250px; border:0;" allowfullscreen></iframe>
           
               <div class="row staff">
                   <div class="col">
@@ -161,7 +149,7 @@
       
                   <div class="col">
                   <h4 class="text-right"><strong>Visit Us</strong></h4>
-                  <p class="text-right">Chocolate & Moer<br><i class="fa fa-map-marker"></i>&nbsp; Leof. Posidonos 109, <br>Glyfada <br><br>email: info@domain.com<br>phone: +00 (123) 456 7890</p>
+                  <p class="text-right">Drizzy<br><i class="fa fa-map-marker"></i>&nbsp; Bafal Marg, Kathmandu 44600, <br>Kalanki <br><br>email: thedrizzyhotel69@gmail.com<br>phone: +977 (01) 523 7330</p>
                   </div>
       
           </div>
