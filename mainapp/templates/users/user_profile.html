@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+    
+</head>
+<body>
+    <header>
+        <h1>Welcome to Your Profile!</h1>
+    </header>
+    
+    <main>
+        <h2>Hello, {{ user.username }}!</h2>
+        <p>First Name: {{ user.customer.first_name }}</p>
+        <p>Last Name: {{ user.customer.last_name }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p>Phone Number: {{ user.customer.phone_number }}</p>
+        
+        <form method="post" action="{% url 'mainapp:customer_logout' %}">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>        
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 The Drizz Hotel</p>
+    </footer>
+</body>
+</html>
