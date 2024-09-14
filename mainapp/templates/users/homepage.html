@@ -1,3 +1,4 @@
+{% load static %}
 {% include 'users/header.html' %}
 <!DOCTYPE html>
 <html lang="en">
@@ -5,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drizzy Restaurant</title>
-    <link href="/mainapp/templates/static/css/style.css" rel="stylesheet">
+    <link href="/mainapp/static/css/style.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">     <!--font-awesome-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">  <!--bootstrap-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  <!--googleapis jquery-->
@@ -93,20 +94,20 @@
           <h3 class="text-center"><br>Gallery<br><br></h3>
               <div class="d-flex flex-row flex-wrap justify-content-center">
                  <div class="d-flex flex-column">
-                    <img src="/mainapp/templates/static/img/1.jpg" class="img-fluid">
-                    <img src="/mainapp/templates/static/img/2.png" class="img-fluid">
+                    <img src="/mainapp/static/img/1.jpg" class="img-fluid">
+                    <img src="/mainapp/static/img/2.png" class="img-fluid">
                  </div>
                  <div class="d-flex flex-column">
-                    <img src="/mainapp/templates/static/img/3.jpeg" class="img-fluid">
-                    <img src="/mainapp/templates/static/img/4.jpeg" class="img-fluid">
+                    <img src="/mainapp/static/img/3.jpeg" class="img-fluid">
+                    <img src="/mainapp/static/img/4.jpeg" class="img-fluid">
                  </div>
                  <div class="d-flex flex-column">
-                     <img src="/mainapp/templates/static/img/5.jpeg" class="img-fluid">
-                     <img src="/mainapp/templates/static/img/6.jpeg" class="img-fluid">
+                     <img src="/mainapp/static/img/5.jpeg" class="img-fluid">
+                     <img src="/mainapp/static/img/6.jpeg" class="img-fluid">
                  </div>
                  <div class="d-flex flex-column">
-                     <img src="/mainapp/templates/static/img/7.jpeg" class="img-fluid">
-                     <img src="/mainapp/templates/static/img/8.jpeg" class="img-fluid">
+                     <img src="/mainapp/static/img/7.jpeg" class="img-fluid">
+                     <img src="/mainapp/static/img/8.jpeg" class="img-fluid">
                  </div>
               </div>
           </div>
@@ -115,7 +116,7 @@
       
       <div class="container" id="reservation">
           <h3 class="text-center"><br><br>Reservation<br><br></h3>
-          <img  src="/mainapp/templates/static/img/16.jpg" class="img-fluid rounded">
+          <img  src="/mainapp/static/img/16.jpg" class="img-fluid rounded">
           <button type="button" onclick="window.location.href='add_reservation' " class="btn btn-outline-dark btn-block btn-lg">Make a reservation Now!</button>
               
       </div><br><br>

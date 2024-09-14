@@ -1,9 +1,308 @@
+{% include 'users/header.html'%}
 <!DOCTYPE html>
-<html>
+<html lang="en">
+    
 <head>
-    <title>VIP Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>VIP SECTION</title>
 </head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    font-family: "Montserrat", sans-serif;
+}
+
+html{
+    font-size: 50%;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    overflow-x: hidden;
+    background-color: #111;
+    color: #fff;
+}
+
+header{
+    margin-top: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 9%;
+    background-color: transparent ;
+    filter: drop-shadow(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.logo{
+    font-size: 3rem;
+    color: brown ;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+
+.logo:hover{
+    transform: scale(1.1);
+    color: red;
+}
+
+nav a{
+    font-size: 1.8rem;
+    color: #fff;
+    margin-left: 4rem;
+    font-weight: 500;
+    transition: 0.3s ease;
+    border-bottom: 3px solid transparent;
+}
+
+nav a:hover,
+nav a.active{
+    color: red;
+    border-bottom: 3px solid red;
+}
+
+
+
+@media (max-width: 995px) {
+    nav{
+        position: absolute;
+        display: none;
+        top: 0;
+        right: 0;
+        width: 40%;
+        border-left: 3px solid red ;
+        border-bottom: 3px solid red;
+        border-bottom-left-radius: 2rem;
+        padding: 1rem ;
+        background-color: #1b1b1b;
+        border-top: 0.1rem solid rgba(0,0,0,0.1);
+    }
+
+    nav.active{
+        display: block;
+    }
+
+    nav a{
+        display: block;
+        font-size: 2rem;
+        margin: 3rem 0;
+    }
+
+    nav a:hover,
+    nav a.active{
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border-bottom: 0.5rem solid red;
+    }
+    
+}
+
+section{
+    min-height: 100vh;
+    padding: 5rem 9% 5rem;
+
+}
+
+
+
+.home{
+    display: flex;
+    justify-content: center ;
+    align-items: center;
+    gap: 8rem;
+    background-color: black;
+}
+
+.home .home-content h1,h3{
+    font-size: 5rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}
+
+span{
+    color: red;
+}
+
+.home-content p{
+    font-size: 1.6rem;
+}
+
+
+
+.home-img{
+    border-radius: 50%;
+}
+
+.home-img img{
+    
+    width: 28vw;
+    border-radius: 50%;
+    box-shadow: 0 0 25px red;
+    cursor: pointer;
+    transition: 0.4s ease-in-out;
+}
+
+.home-img img:hover{
+
+    transform: scale(1.1);
+    font-size: 1.8rem;
+    font-weight: 500;
+    box-shadow:  0 0 25px red,
+    0 0 50px red,
+    0 0 75px red,
+    0 0 100px red
+    ;
+       
+}
+
+.social-icons a{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 4rem;
+    height: 4rem;
+    background: transparent ;
+    border: 0.2rem solid red;
+    font-size: 2rem;
+    border-radius: 50%;
+    margin: 3rem 1.5rem 3rem 0;
+    transition: 0.3s ease;
+    color: red;
+}
+
+.social-icons a:hover{
+    color: black;
+    background-color: red;
+    transform: scale(1.3) translateY(-5px);
+    box-shadow: 0 0 25px red;
+    
+}
+
+.btn{
+    display: inline-block;
+    padding: 1rem 2.8rem;
+    background-color: black;
+    border-radius: 4rem;
+    font-size: 1.6rem;
+    color:red;
+    letter-spacing: 0.3rem;
+    font-weight: 600;
+    border: 2px solid red;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.btn:hover{
+    transform: scale(1.03);
+    background-color: red;
+    color: #111;
+    box-shadow: 0 0 25px red;
+}
+
+
+
+/* Responsive */
+
+
+@media (max-width: 1000px) {
+    .home{
+        gap: 4rem;
+    }
+}
+
+@media (max-width:995px){
+    .home{
+        flex-direction: column;
+    }
+    .home-content{
+        font-size: 5rem;
+    }
+
+    .home-img img{
+        width: 40vh;
+        margin-top: 4rem;
+    }
+
+
+}
+</style>
 <body>
-    <h1>Welcome to the VIP Page!</h1>
+
+    </header>
+    <section class="home">
+        <div class="home-img">
+            <img src="/mainapp/static/img/main.jpg" alt="">
+        </div>
+        <div class="home-content">
+            <h1>Hello there, <span>Peasants</span></h1>
+            <h3>Praise the lords <span class="typewriter-text"></span></h3>
+            <p>Here you are provided with special services. You can order specific dishes of your preferences outside of our menu, Reserve spa and massage when you come to the resturant for free and can also host various event privately.</p>
+            
+            <div class="social-icons">
+                  
+                <h2>Here are some social handles for any issuse or doubts you have.</h2>
+                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <a href="#" class="btn">Specific Order</a>
+            <a href="#" class="btn">Services</a>
+        </div>
+    </section>
+
+    <script
+    type="module"
+    src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+  ></script>
+  <script
+    nomodule
+    src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+  ></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.1.0/typed.umd.js" integrity="sha512-+2pW8xXU/rNr7VS+H62aqapfRpqFwnSQh9ap6THjsm41AxgA0MhFRtfrABS+Lx2KHJn82UOrnBKhjZOXpom2LQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <script>
+        var typed = new Typed(".typewriter-text ",
+    {
+        strings: [" ",
+            "",
+           
+            "Sudip",
+           
+            "Samri",
+           
+            "Sami",
+           
+            "Sags",
+
+            "Kamu"
+        ],
+        typeSpeed: 100,
+        backSpeed: 60,
+        loop:true,
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+        
+    }
+)
+    </script>
 </body>
 </html>
