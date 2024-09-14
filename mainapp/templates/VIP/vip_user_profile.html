@@ -1,7 +1,143 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VIP Profile</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f0f2f5;
+            color: #333;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #000000 0%, #ff0000 100%);
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            color: #2c3e50;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        form {
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* VIP Customer Info Section */
+        .vip-info {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #ecf0f1;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .vip-info img {
+            border-radius: 50%;
+            width: 120px; /* Size of the profile picture */
+            height: 120px; /* Size of the profile picture */
+            object-fit: cover; /* Ensures the image covers the circle */
+        }
+
+        .vip-info .info-text {
+            flex: 1; /* Allows the text section to take up the remaining space */
+            margin-right: 20px; /* Spacing between the text and the image */
+        }
+
+        .vip-info p {
+            font-size: 1.2rem;
+            margin: 10px 0;
+            color: #2c3e50;
+        }
+
+        .vip-info p strong {
+            color: #ff0000; /* Red color for the labels */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            main {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .vip-info img {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+    {% load static %}
 </head>
 <body>
     <header>
@@ -11,21 +147,23 @@
     <main>
         <h2>Hello, {{ user.username }}! Greetings</h2>
 
-        <!-- Check if the VIPCustomer object exists -->
-        {% if VIPcustomer %}
-            <p>First Name: {{ VIPcustomer.first_name }}</p>
-            <p>Last Name: {{ VIPcustomer.last_name }}</p>
-            <p>Email: {{ VIPcustomer.email }}</p>
-            <p>Phone Number: {{ VIPcustomer.phone }}</p>
-        {% else %}
-            <p>VIP profile information not available.</p>
-        {% endif %}
+        <!-- VIP Customer Information Section -->
+        <div class="vip-info">
+            <div class="info-text">
+                {% if VIPcustomer %}
+                    <p><strong>First Name:</strong> {{ VIPcustomer.first_name }}</p>
+                    <p><strong>Last Name:</strong> {{ VIPcustomer.last_name }}</p>
+                    <p><strong>Email:</strong> {{ VIPcustomer.email }}</p>
+                    <p><strong>Phone Number:</strong> {{ VIPcustomer.phone }}</p>
+                {% else %}
+                    <p>VIP profile information not available.</p>
+                {% endif %}
+            </div>
+            <!-- Profile Picture -->
+            <img src="{% static 'images/profile_photo.jpg' %}" alt="{{ VIPcustomer.first_name }}'s Photo">
+        </div>
         
-        <form method="post" action="{% url 'mainapp:add_vip_reservation' %}"></form>
-            {% csrf_token %}
-            <button type="submit">Add Reservation</button>
-        </form>
-
+        <!-- Logout Form -->
         <form method="post" action="{% url 'mainapp:vip_customer_logout' %}">
             {% csrf_token %}
             <button type="submit">Logout</button>
@@ -33,7 +171,7 @@
     </main>
     
     <footer>
-        <p>&copy; 2024 The Drizz Restaurant</p>
+        <p>&copy; 2024 The Drizz Restaurant. All rights reserved.</p>
     </footer>
 </body>
 </html>

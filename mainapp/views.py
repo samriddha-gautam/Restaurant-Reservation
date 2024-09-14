@@ -359,4 +359,4 @@ class VIPUserProfileView(LoginRequiredMixin, View):
 
 def VIPCustomerLogoutView(request):
     logout(request)
-    return redirect(request,'VIP/VIP.html')
+    return redirect('mainapp:index')

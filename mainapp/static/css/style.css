@@ -97,7 +97,48 @@ margin-top:40vh;
 .gallery{
     margin: 5px;
 }
+#gallery {
+    max-width: 80%; /* Control gallery width */
+    margin: 0 auto; /* Center the gallery */
+    position: relative;
+}
 
+h3.text-center {
+    position: relative;
+    z-index: 10; /* Ensure title stays above images */
+    color: #000;
+    background-color: #fff; /* Optional background for better visibility */
+    padding: 10px;
+    text-align: center;
+}
+
+.gallery-slider {
+    position: relative;
+    height: 400px; /* Fixed height for gallery slider */
+    overflow: hidden; /* Hide overflow */
+    margin-top: 20px; /* Space below the title */
+}
+
+.gallery-images {
+	display: flex;
+    transition: transform 1s ease-in-out; /* Smooth sliding transition */
+    width: 100%;
+}
+
+.slide {
+    min-width: 100%; /* Each slide takes full width of the container */
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gallery-images img {
+    max-width: 100%; /* Ensure images fit within the slide width */
+    max-height: 100%; /* Ensure images fit within the slide height */
+    object-fit: contain; /* Ensure the image is fully visible and maintains aspect ratio */
+    display: block;
+}
 .logo{
     width: 150px;
     height: 250px;

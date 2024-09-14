@@ -45,28 +45,31 @@
                     
                     
                     
-                    <li class="nav-item">
-	                 <a class="nav-link" href="{% url 'mainapp:aboutus' %}">About Us</a>
+                <li class="nav-item">
+	                <a class="nav-link" href="#aboutus">About Us</a>
 	             </li>
 	            <li class="nav-item">
-	                <a class="nav-link" href="{% url 'mainapp:gallery' %}">Gallery</a>
+	                <a class="nav-link" href="#gallery">Gallery</a>
 	            </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'mainapp:add_reservation' %}">Reservation</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'mainapp:find_us' %}">Find Us</a>
-                    </li>
+                <li class="nav-item"></li>
+	                <a class="nav-link" href="{% url 'mainapp:vip_customer_login' %}">VIP</a>
+	            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'mainapp:add_reservation' %}">Reservation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#footer">Find Us</a>
+                </li>
                                       
                 </ul>
                 
                     
-                    <div>
+
                     <ul class="navbar-nav ml-auto">
-			<li><a class="nav-link fa fa-sign-in" data-toggle="modal" data-target=" ">&nbsp;Sign Up</a></li>
-			<li><a class="nav-link fa fa-user-plus" data-toggle="modal" data-target=" ">&nbsp;Login</a></li>
+			            <li><a class="nav-link fa fa-sign-in" data-toggle="modal" href="{% url 'mainapp:customer_register' %}">Sign Up</a></li>
+			            <li><a class="nav-link fa fa-user-plus" data-toggle="modal" href="{% url 'mainapp:customer_login' %}">Login</a></li>
                     </ul> 
-                    </div>
+
                                   
             </div>
         </div>

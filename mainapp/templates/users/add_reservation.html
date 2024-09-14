@@ -1,16 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+    /* forms.css */
+
+    .container {
+        text-align: center;
+        background-color: #beaaaa;
+        padding: 20px;
+        border-radius: 5px;
+    }
+
+    form {
+        display: inline-block;
+        margin: 50px auto;
+        padding: 30px;
+        width: 100%;
+        max-width: 600px;
+        background-color: #ffffff;
+        border: 3px solid #2d0101;
+        border-radius: 8px;
+        text-align: left;
+        min-height: 600px;
+    }
+
+    form label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    form input[type="text"],
+    form input[type="password"],
+    form input[type="email"],
+    form input[type="date"],
+    form input[type="time"],
+    form input[type="number"],
+    form textarea {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 16px;
+    }
+
+    form input[type="submit"] {
+        background-color: #4CAF50;
+        color: rgb(54, 37, 37);
+        border: none;
+        padding: 12px 24px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 12px;
+        margin: 4px 7px;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    form input[type="submit"]:hover {
+        background-color: #687268;
+        transform: scale(1.05);
+    }
+
+    form input[type="submit"]:active {
+        background-color: #397d3b;
+        transform: scale(1);
+    }
+
+    form .errorlist {
+        color: red;
+        margin-bottom: 15px;
+    }
+
+    form .errorlist li {
+        margin-bottom: 5px;
+    }
+
+    /* Style for the heading */
+    h1 {
+        text-align: center;
+        color: #2d0101; /* Dark color for the heading */
+        margin-top: 20px; /* Add margin to the top */
+        margin-bottom: 30px; /* Add margin to the bottom */
+        font-size: 2em; /* Increase the font size */
+        font-weight: bold; /* Make the font bold */
+    }
+
+    /* Style for messages */
+    .messages {
+        list-style-type: none;
+        padding: 0;
+        margin-bottom: 20px;
+    }
+
+    .messages li {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 10px;
+    }
+
+    /* Add styles for different message tags */
+    .messages .error {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+
+    .messages .success {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .messages .info {
+        background-color: #d1ecf1;
+        color: #0c5460;
+    }
+
+    .messages .warning {
+        background-color: #fff3cd;
+        color: #856404;
+    }
+
+    </style>
+</head>
+<body>
 
 {% block content %}
 <h1>Add Reservation</h1>
+
 {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                    <li class="{{ message.tags }}">{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-<form method="post" action="{% url 'mainapp:add_reservation' %}" >
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
-</form>
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<div class="container">
+    <form method="post" action="{% url 'mainapp:add_reservation' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
 {% endblock %}
+
+</body>
+</html>
