@@ -87,30 +87,43 @@
     <!-- End of about us section -->
     
     <!-- Gallery Section -->
-    <div class="header2"></div>
-    <div class id="gallery"><br>
+    <div id="gallery">
         <div class="container">
-            <h3 class="text-center"><br>Gallery<br><br></h3>
-            <div class="d-flex flex-row flex-wrap justify-content-center">
-                <div class="d-flex flex-column">
-                    <img src="{% static 'images/1.jpg' %}" class="img-fluid">
-                    <img src="{% static 'images/2.png' %}" class="img-fluid">
-                </div>
-                <div class="d-flex flex-column">
-                    <img src="{% static 'images/3.jpeg' %}" class="img-fluid">
-                    <img src="{% static 'images/4.jpeg' %}" class="img-fluid">
-                </div>
-                <div class="d-flex flex-column">
-                    <img src="{% static 'images/5.jpeg' %}" class="img-fluid">
-                    <img src="{% static 'images/6.jpeg' %}" class="img-fluid">
-                </div>
-                <div class="d-flex flex-column">
-                    <img src="{% static 'images/7.jpeg' %}" class="img-fluid">
-                    <img src="{% static 'images/8.jpeg' %}" class="img-fluid">
+            <h3 class="text-center">Gallery</h3>
+            <div class="gallery-slider">
+                <div class="gallery-images">
+                    <div class="slide">
+                        <img src="{% static 'images/1.jpg' %}" class="img-fluid" alt="Image 1">
+                    </div>
+                    <div class="slide">
+                        <img src="{% static 'images/2.png' %}" class="img-fluid" alt="Image 2">
+                    </div>
+                    <div class="slide">
+                        <img src="{% static 'images/3.jpeg' %}" class="img-fluid" alt="Image 3">
+                    </div>
+                    <div class="slide">
+                        <img src="{% static 'images/4.jpeg' %}" class="img-fluid" alt="Image 4">
+                    </div>
+                    <div class="slide">
+                        <img src="{% static 'images/5.jpeg' %}" class="img-fluid" alt="Image 5">
+                    </div>
+                    <div class="slide">
+                        <img src="{% static 'images/6.jpeg' %}" class="img-fluid" alt="Image 6">
+                    </div>
+                    <div class="slide">
+                        <img src="{% static 'images/7.jpeg' %}" class="img-fluid" alt="Image 7">
+                    </div>
+                    <div class="slide">
+                        <img src="{% static 'images/8.jpeg' %}" class="img-fluid" alt="Image 8">
+                    </div>
                 </div>
             </div>
         </div>
-    </div><br><br>
+    </div>
+    
+    
+    
+
     <!-- End of Gallery Section -->
     
     <!-- Reservation Section -->
@@ -156,4 +169,26 @@
         
     {% include "users/footer.html" %}
 </body>
+<script>
+    let currentIndex = 0;
+    const slides = document.querySelectorAll('.gallery-images .slide');
+    const totalSlides = slides.length;
+
+    function showNextSlide() {
+        // Update the index for the next slide
+        currentIndex = (currentIndex + 1) % totalSlides;
+
+        // Update the transform property to slide images
+        document.querySelector('.gallery-images').style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    // Initially display the first slide
+    document.querySelector('.gallery-images').style.transform = `translateX(0%)`;
+
+    // Change slide every 3 seconds
+    setInterval(showNextSlide, 3000);
+</script>
+
+
+
 </html>
