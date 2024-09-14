@@ -1,25 +1,19 @@
 from django import forms
-from .models import Reservation,VIPReservation,Customer
+from .models import Reservation, VIPCustomer,VIPReservation,Customer
 from django.contrib.auth.models import User
 
 
-class DateInput(forms.DateInput):
-    input_type = 'date'
-
-class TimeInput(forms.TimeInput):
-    input_type = 'time'    
- 
 class CustomerRegistrationForm(forms.ModelForm):
     first_name = forms.CharField(widget=forms.TextInput())
     last_name = forms.CharField(widget=forms.TextInput())
     username = forms.CharField(widget=forms.TextInput())
     password = forms.CharField(widget=forms.PasswordInput())
     email = forms.CharField(widget=forms.EmailInput())
-    phone_number = forms.CharField(widget=forms.TextInput())  # New phone number field
+    phone = forms.CharField(widget=forms.TextInput())  # New phone number field
 
     class Meta:
         model = Customer
-        fields = ["first_name","last_name","username", "password", "email", "phone_number"]
+        fields = ["first_name","last_name","username", "password", "email", "phone"]
 
     def clean_username(self):
         uname = self.cleaned_data.get("username")
@@ -27,6 +21,16 @@ class CustomerRegistrationForm(forms.ModelForm):
             raise forms.ValidationError(
                 "Customer with this username already exists.")
         return uname
+    def clean_phone(self):
+        phone = self.cleaned_data.get('phone')
+        if not phone:
+            raise forms.ValidationError("Phone number is required.")
+        return phone
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if not email:
+            raise forms.ValidationError("email is required.")
+        return email
     
 class CustomerLoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput())
@@ -34,18 +38,22 @@ class CustomerLoginForm(forms.Form):
 
 
 
-# First form
-class ReservationForm(forms.ModelForm):
-    class Meta:
-        model = Reservation
-        fields = ['first_name', 'last_name', 'email', 'phone', 'date', 'time', 'num_guests', 'table']
 
-# Second form with custom widgets for date and time
-class CustomReservationForm(forms.ModelForm):
-    date = forms.DateField(widget=DateInput) 
-    time = forms.TimeField(widget=TimeInput)
-    num_guests = forms.IntegerField(min_value=1, max_value=10, label="Number of Guests")
 
+class CustomerReservationForm(forms.ModelForm):
+    date = forms.DateField(
+        widget=forms.DateInput(attrs={'type': 'date'}),
+        label='Reservation Date'
+    )
+    time = forms.TimeField(
+        widget=forms.TimeInput(attrs={'type': 'time'}),
+        label='Reservation Time'
+    )
+    num_guests = forms.IntegerField(
+        min_value=1,
+        max_value=10,
+        label="Number of Guests"
+    )
     class Meta:
         model = Reservation
         fields = ['first_name', 'last_name', 'email', 'phone', 'date', 'time', 'num_guests', 'table']
@@ -64,12 +72,29 @@ class CredentialsForm(forms.Form):
 class OTPForm(forms.Form):
     otp = forms.CharField(max_length=6)  
 
+class SetCredentialsForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ['username', 'password']
+
+class VIPCustomerLoginForm(forms.Form):
+    username = forms.CharField(widget=forms.TextInput())
+    password = forms.CharField(widget=forms.PasswordInput())
+
 
 class VIPReservationForm(forms.ModelForm):
-    date = forms.DateField(widget=DateInput) 
-    time = forms.TimeField(widget=TimeInput)
+    date = forms.DateField() 
+    time = forms.TimeField()
     num_guests = forms.IntegerField(min_value=1, max_value=50, label="Number of Guests")
 
     class Meta:
         model = VIPReservation
-        fields = ['vip_customer', 'date', 'time', 'num_guests', 'table', 'special_notes']
+        fields = ['date', 'time', 'num_guests', 'table', 'special_notes']
+        widgets = {
+            'vip_customer': forms.HiddenInput(),  # Hide vip_customer
+        }
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.fields['vip_customer'].queryset = VIPCustomer.objects.none()

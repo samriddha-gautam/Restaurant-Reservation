@@ -4,7 +4,7 @@ from .models import Reservation,Table,VIPCustomer,VIPReservation,VipTable ,Table
 
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'phone_number', 'email')
+    list_display = ('first_name', 'last_name', 'phone', 'email')
     search_fields = ('first_name', 'last_name', 'email')
 
 

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> VIP Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            margin-top: 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .error {
+            color: red;
+            margin-bottom: 15px;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .register-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 5px 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .register-btn:hover {
+            background-color: #0056b3;
+        }
+        .messages {
+        list-style-type: none;
+        padding: 0;
+    }
+    .messages li {
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #ddd;
+    }
+    .success {
+        background-color: #d4edda;
+        color: #155724;
+    }
+    .error {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+    </style>
+</head>
+<body>
+    {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    <div class="container">
+        
+        <h2>VIP Login</h2>
+        <form method="post" action="{% url 'mainapp:vip_customer_login' %}">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            
+            <div class="form-group">
+                {{ form.username.label_tag }} 
+                {{ form.username }}
+                {{ form.username.errors }}
+            </div>
+            
+            <div class="form-group">
+                {{ form.password.label_tag }}
+                {{ form.password }}
+                {{ form.password.errors }}
+            </div>
+            
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
+            
+            <div class="btn-container">
+                <button type="submit">Login</button>
+                <a href="{% url 'mainapp:vip_credentials' %}" class="register-btn">Register Now</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

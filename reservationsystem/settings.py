@@ -117,6 +117,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'mainapp' / 'static',
+]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -132,8 +136,8 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True  
 
 # Email account credentials
-EMAIL_HOST_USER = '####@####.###'  
-EMAIL_HOST_PASSWORD = '#### #### #### ####'  
+EMAIL_HOST_USER = 'thedrizzhotel69@gmail.com'  
+EMAIL_HOST_PASSWORD = 'vezo umcx fuxu mxzc'  
 
 # Default "from" email address
-DEFAULT_FROM_EMAIL = '####@####.###'  
+DEFAULT_FROM_EMAIL = 'thedizzhotel69@gmail.com' 

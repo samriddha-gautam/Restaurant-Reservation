@@ -14,7 +14,7 @@
         <p>First Name: {{ user.customer.first_name }}</p>
         <p>Last Name: {{ user.customer.last_name }}</p>
         <p>Email: {{ user.email }}</p>
-        <p>Phone Number: {{ user.customer.phone_number }}</p>
+        <p>Phone Number: {{ user.customer.phone }}</p>
         
         <form method="post" action="{% url 'mainapp:customer_logout' %}">
             {% csrf_token %}
@@ -23,7 +23,7 @@
     </main>
     
     <footer>
-        <p>&copy; 2024 The Drizz Hotel</p>
+        <p>&copy; 2024 The Drizz Restaurant</p>
     </footer>
 </body>
 </html>

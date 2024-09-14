@@ -36,6 +36,16 @@
             border: 1px solid #ddd;
             border-radius: 4px;
         }
+        .form-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .form-link span,
+        .form-link a {
+            font-size: 14px;
+            font-weight: 400;
+            color: #232836;
+        }
         .error {
             color: red;
             margin-bottom: 15px;
@@ -55,29 +65,51 @@
 </head>
 <body>
     <div class="container">
-        <h2>Login</h2>
-        <form method="post" action="{% url 'mainapp:customer_login' %}">
-            {% csrf_token %}
-            {{ form.non_field_errors }}
-            
-            <div class="form-group">
-                {{ form.username.label_tag }} 
-                {{ form.username }}
-                {{ form.username.errors }}
+        <div class="form login">
+            <div class="form-content">
+                <header>Login</header>
+                <div class="form-link">
+                    <span>Don't have an account? <a href="#" class="link signup-link">Signup</a></span>
+                </div>
             </div>
-            
-            <div class="form-group">
-                {{ form.password.label_tag }}
-                {{ form.password }}
-                {{ form.password.errors }}
+            <div class="line"></div>
+            <div class="media-options">
+                <a href="#" class="field facebook">
+                    <i class='bx bxl-facebook facebook-icon'></i>
+                    <span>Login with Facebook</span>
+                </a>
             </div>
-            
-            {% if error %}
-                <p class="error">{{ error }}</p>
-            {% endif %}
-            
-            <button type="submit">Login</button>
-        </form>
+        </div>
+
     </div>
+     <script>
+        const forms = document.querySelector(".forms"),
+            pwShowHide = document.querySelectorAll(".eye-icon"),
+            links = document.querySelectorAll(".link");
+
+        pwShowHide.forEach(eyeIcon => {
+            eyeIcon.addEventListener("click", () => {
+                let pwFields = eyeIcon.parentElement.parentElement.querySelectorAll(".password");
+
+                pwFields.forEach(password => {
+                    if (password.type === "password") {
+                        password.type = "text";
+                        eyeIcon.classList.replace("bx-hide", "bx-show");
+                        return;
+                    }
+                    password.type = "password";
+                    eyeIcon.classList.replace("bx-show", "bx-hide");
+                })
+
+            })
+        })
+
+        links.forEach(link => {
+            link.addEventListener("click", e => {
+                e.preventDefault(); // Preventing form submit
+                forms.classList.toggle("show-signup");
+            })
+        })
+    </script>
 </body>
 </html>

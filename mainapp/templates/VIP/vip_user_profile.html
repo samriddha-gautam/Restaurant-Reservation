@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VIP Profile</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Your VIP Profile!</h1>
+    </header>
+    
+    <main>
+        <h2>Hello, {{ user.username }}! Greetings</h2>
+
+        <!-- Check if the VIPCustomer object exists -->
+        {% if VIPcustomer %}
+            <p>First Name: {{ VIPcustomer.first_name }}</p>
+            <p>Last Name: {{ VIPcustomer.last_name }}</p>
+            <p>Email: {{ VIPcustomer.email }}</p>
+            <p>Phone Number: {{ VIPcustomer.phone }}</p>
+        {% else %}
+            <p>VIP profile information not available.</p>
+        {% endif %}
+        
+        <form method="post" action="{% url 'mainapp:vip_customer_logout' %}">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>        
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 The Drizz Restaurant</p>
+    </footer>
+</body>
+</html>

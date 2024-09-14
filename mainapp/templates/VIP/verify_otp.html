@@ -1,19 +1,118 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verify OTP</title>
 </head>
+<style>
+    /* General Styles */
+body {
+    background-color: #1b1b1b;  /* Dark background */
+    color: #e0e0e0;  /* Light grey text */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #2b2b2b;  /* Slightly lighter dark background */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    color: red;  /* Red theme for heading */
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+form {
+    margin-top: 20px;
+}
+
+label {
+    color: red;  /* Red labels */
+    font-weight: bold;
+}
+
+input[type="text"], input[type="password"], textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0 20px 0;
+    display: inline-block;
+    border: 1px solid red;  /* Red border */
+    border-radius: 4px;
+    background-color: #333;
+    color: #e0e0e0;  /* Light text */
+    box-sizing: border-box;
+}
+
+button {
+    display: inline-block;
+    padding: 1rem 2.8rem;
+    background-color: black;
+    border-radius: 4rem;
+    font-size: 1.6rem;
+    color:red;
+    letter-spacing: 0.3rem;
+    font-weight: 600;
+    border: 2px solid red;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+/* Hover effect for button */
+button:hover {
+    transform: scale(1.03);
+    background-color: red;
+    color: #111;
+    box-shadow: 0 0 25px red;
+}
+
+.messages {
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+</style>
 <body>
-    <h1>Enter OTP</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Verify</button>
-    </form>
-    {% if messages %}
-        {% for message in messages %}
-            <p>{{ message }}</p>
-        {% endfor %}
-    {% endif %}
+    <div class="container">
+        <h1>Verify Yourself</h1>
+        
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>
+            <button type="submit">Verify</button>
+        </form>
+
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
 </body>
 </html>
