@@ -2,19 +2,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="icon" type="image/x-icon" sizes="32x32" href="/mainapp/templates/static/img/logo1.png">    <!--favicon-->
+<link rel="icon" type="image/x-icon" sizes="32x32" href="/mainapp/static/img/logo1.png">    <!--favicon-->
 <title>Drizzy Restaurant</title>
 <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="/mainapp/templates/static/css/style.css" rel="stylesheet" type="text/css">     <!--style.css document-->
+ <link href="{% static 'css/style.css' %}" rel="stylesheet">      <!--style.css document-->
+ <style>
+    .header
+{
+	/* background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(/mainapp/static/images/1.jpg); */
+	background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url("{% static 'images/1.jpg' %}");
+	height:80vh;
+	background-position:center;
+	background-size:cover;
+}
+
+.header2
+{
+	background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url("{% static 'images/6.jpeg' %}");
+	height:40vh;
+	background-position:center;
+	background-size:cover;
+	background-attachment:fixed;
+}
+
+
+ </style>
 </head>
 
 <body>
  <!---navbar--->   
 <nav class="navbar navbar-expand-md navbar-light fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="users/homepage.html">
-		<strong><em>Drizzy</em></strong>
+            <a class="navbar-brand" href="{% url 'mainapp:index' %}">
+		        <strong><em>Drizzy</em></strong>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navi">
                 <span class="navbar-toggler-icon"></span>
@@ -25,16 +46,16 @@
                     
                     
                     <li class="nav-item">
-	                 <a class="nav-link" href="users/aboutus.html">About Us</a>
+	                 <a class="nav-link" href="{% url 'mainapp:aboutus' %}">About Us</a>
 	             </li>
 	            <li class="nav-item">
-	                <a class="nav-link" href="users/gallery.html">Gallery</a>
+	                <a class="nav-link" href="{% url 'mainapp:gallery' %}">Gallery</a>
 	            </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="users/add_reservation.html">Reservation</a>
+                        <a class="nav-link" href="{% url 'mainapp:add_reservation' %}">Reservation</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="users/footer.html">Find Us</a>
+                        <a class="nav-link" href="{% url 'mainapp:find_us' %}">Find Us</a>
                     </li>
                                       
                 </ul>

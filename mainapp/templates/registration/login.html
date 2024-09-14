@@ -1,115 +1,50 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 400px;
-            margin: 50px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            margin-top: 0;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input[type="text"],
-        input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        .form-link {
-            text-align: center;
-            margin-top: 10px;
-        }
-        .form-link span,
-        .form-link a {
-            font-size: 14px;
-            font-weight: 400;
-            color: #232836;
-        }
-        .error {
-            color: red;
-            margin-bottom: 15px;
-        }
-        button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <div class="container">
-        <div class="form login">
-            <div class="form-content">
-                <header>Login</header>
-                <div class="form-link">
-                    <span>Don't have an account? <a href="#" class="link signup-link">Signup</a></span>
-                </div>
+    <header>
+        <h1>Login to Your Account</h1>
+    </header>
+
+    <main>
+        <!-- Check if there's an error and display it -->
+        {% if error %}
+            <div class="error">
+                <p>{{ error }}</p>
             </div>
-            <div class="line"></div>
-            <div class="media-options">
-                <a href="#" class="field facebook">
-                    <i class='bx bxl-facebook facebook-icon'></i>
-                    <span>Login with Facebook</span>
-                </a>
+        {% endif %}
+        
+        <!-- Login form -->
+        <form method="post">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="id_username">Username:</label>
+                {{ form.username }}
             </div>
-        </div>
+            
+            <div class="form-group">
+                <label for="id_password">Password:</label>
+                {{ form.password }}
+            </div>
+            
+            <div class="form-group">
+                <button type="submit">Login</button>
+            </div>
+        </form>
 
-    </div>
-     <script>
-        const forms = document.querySelector(".forms"),
-            pwShowHide = document.querySelectorAll(".eye-icon"),
-            links = document.querySelectorAll(".link");
+        <p>Don't have an account? <a href="{% url 'mainapp:customer_register' %}">Register here</a></p>
 
-        pwShowHide.forEach(eyeIcon => {
-            eyeIcon.addEventListener("click", () => {
-                let pwFields = eyeIcon.parentElement.parentElement.querySelectorAll(".password");
+    </main>
 
-                pwFields.forEach(password => {
-                    if (password.type === "password") {
-                        password.type = "text";
-                        eyeIcon.classList.replace("bx-hide", "bx-show");
-                        return;
-                    }
-                    password.type = "password";
-                    eyeIcon.classList.replace("bx-show", "bx-hide");
-                })
-
-            })
-        })
-
-        links.forEach(link => {
-            link.addEventListener("click", e => {
-                e.preventDefault(); // Preventing form submit
-                forms.classList.toggle("show-signup");
-            })
-        })
-    </script>
+    <footer>
+        <p>&copy; 2024 The Drizz Restaurant</p>
+    </footer>
 </body>
 </html>

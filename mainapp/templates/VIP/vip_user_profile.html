@@ -21,6 +21,11 @@
             <p>VIP profile information not available.</p>
         {% endif %}
         
+        <form method="post" action="{% url 'mainapp:add_vip_reservation' %}"></form>
+            {% csrf_token %}
+            <button type="submit">Add Reservation</button>
+        </form>
+
         <form method="post" action="{% url 'mainapp:vip_customer_logout' %}">
             {% csrf_token %}
             <button type="submit">Logout</button>

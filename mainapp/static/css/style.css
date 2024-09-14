@@ -17,25 +17,6 @@ h3{
     text-shadow: 2px 1px grey;
 }
 
-/*headers*/
-.header
-{
-	background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(/mainapp/templates/img/1.jpg);
-	height:80vh;
-	background-position:center;
-	background-size:cover;
-}
-
-.header2
-{
-	background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(/mainapp/templates/img/6.jpeg);
-	height:40vh;
-	background-position:center;
-	background-size:cover;
-	background-attachment:fixed;
-}
-
-
 /*navbar*/
 .navbar{
 	background-color:white;
@@ -76,11 +57,7 @@ margin-top:40vh;
 }
 
 /*footer*/
-.footer{
-padding-top:30px;
-padding-bottom:30px;
-color:black;
-}
+
 
 .social-icon a{
 	margin:0 16px 20px 16px;

@@ -5,22 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> VIP Login</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 400px;
-            margin: 50px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+         body {
+                background-color: #f4f4f4;
+                font-family: 'Arial', sans-serif;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+        .login-container {
+                background-color: #ffffff;
+                border-radius: 8px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                padding: 40px;
+                width: 400px;
+                text-align: center;
+            }
+
         h2 {
-            margin-top: 0;
+            color: #333;
+            margin-bottom: 20px;
         }
         .form-group {
             margin-bottom: 15px;
@@ -41,30 +48,36 @@
             margin-bottom: 15px;
         }
         .btn-container {
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            /* justify-content: space-evenly; */
+            justify-content: center;
         }
-        button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
+        .login-btn {
+                background-color: #333;
+                color: #fff;
+                padding: 12px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                width: 100%;
+                font-size: 16px;
+            }
+
+            .login-btn:hover {
+                background-color: #555;
+            }
         .register-btn {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 5px 5px;
-            border-radius: 4px;
-            cursor: pointer;
+            background-color: #333;
+                color: #fff;
+                padding: 12px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                width: 100%;
+                font-size: 16px;
         }
         .register-btn:hover {
-            background-color: #0056b3;
+            background-color: #555;
         }
         .messages {
         list-style-type: none;
@@ -117,7 +130,7 @@
             {% endif %}
             
             <div class="btn-container">
-                <button type="submit">Login</button>
+                <button type="submit" class="login-btn">Login</button>
                 <a href="{% url 'mainapp:vip_credentials' %}" class="register-btn">Register Now</a>
             </div>
         </form>

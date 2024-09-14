@@ -20,10 +20,14 @@ from .forms import CustomerReservationForm, CredentialsForm , OTPForm, SetCreden
 
 def index(request):
     return render(request, 'users/homepage.html')
-
-
-def vip_index(request):
-    return render(request, 'users/VIP.html')
+def about_us(request):
+    return render(request, 'users/about_us.html')
+def gallery(request):
+    return render(request, 'users/gallery.html')
+def find_us(request):
+    return render(request, 'users/find_us.html')
+# def vip_index(request):
+#     return render(request, 'users/VIP.html')
 
 
 def registration_success(request):
@@ -40,6 +44,9 @@ class CustomerRegistrationView(CreateView):
         username = form.cleaned_data.get("username")
         password = form.cleaned_data.get("password")
         email = form.cleaned_data.get("email")
+        first_name = form.cleaned_data.get("first_name")
+        last_name = form.cleaned_data.get("last_name")
+        phone = form.cleaned_data.get("phone")
 
         # Check if the username already exists
         if User.objects.filter(username=username).exists():
@@ -51,8 +58,13 @@ class CustomerRegistrationView(CreateView):
             form.add_error('email', 'Email address already in use')
             return self.form_invalid(form)
 
+        # Create the user and the Customer instance
         new_user = User.objects.create_user(username, email, password)
         form.instance.user = new_user
+        form.instance.first_name = first_name
+        form.instance.last_name = last_name
+        form.instance.phone = phone
+        form.save()
         login(self.request, new_user)
         return super().form_valid(form)
 
@@ -62,7 +74,6 @@ class CustomerRegistrationView(CreateView):
             return next_url
         else:
             return self.success_url
-
 
 def CustomerLogoutView(request):
     logout(request)
@@ -123,20 +134,30 @@ def add_reservation(request):
     if request.method == 'POST':
         form = CustomerReservationForm(request.POST)
         if form.is_valid():
-            # Save the reservation (this will handle customer creation/linking)
-            form.save()
-            messages.success(request, "Reservation successfully created.")
-            return redirect('mainapp:reservation_success')
+            reservation = form.save(commit=False)
+            
+            # Get the customer linked to the current user
+            user_id = request.session.get('user_id')
+            if user_id:
+                try:
+                    customer = Customer.objects.get(user_id=user_id)
+                    reservation.customer = customer
+                    reservation.save()
+                    messages.success(request, "Reservation successfully added!")
+                    return redirect('mainapp:reservation_success')
+                except Customer.DoesNotExist:
+                    messages.error(request, "Customer not found. Please log in.")
+            else:
+                messages.error(request, "User ID not found in session.")
+                return redirect('mainapp:customer_login')
+
     else:
-        form = CustomerReservationForm()  # Show an empty form on GET requests
+        form = CustomerReservationForm()
 
     return render(request, 'users/add_reservation.html', {'form': form})
 
-
 def reservation_success(request):
     return render(request, 'users/reservation_success.html')
-
-
 
 
 # VIP Section starts here
@@ -185,7 +206,7 @@ def verify_otp_view(request):
             
             if not email:
                 messages.error(request, 'Session expired. Please request a new OTP.')
-                return redirect('mainapp:credentials_view')
+                return redirect('mainapp:vip_credentials')  # Ensure this is correct
 
             stored_otp = otp_storage.get(email)
             if stored_otp == otp:
@@ -203,7 +224,7 @@ def verify_otp_view(request):
                         if customer:
                             # If the customer exists in the Customer model, delete it and transfer data to VIPCustomer
                             customer_instance = Customer.objects.get(email=email)
-                            customer_instance.delete()  # Remove from normal Customer table
+                            customer_instance.delete()
 
                             # Create new VIP customer using the VIP data
                             VIPCustomer.objects.create(
@@ -211,11 +232,19 @@ def verify_otp_view(request):
                                 last_name=vip_data['last_name'],
                                 phone=vip_data['phone'],
                                 email=email,
-                                user=customer_instance.user if customer_instance else None  # Attach user if exists
+                                user=customer_instance.user
                             )
+                        else:
+                            VIPCustomer.objects.create(
+                                first_name=vip_data['first_name'],
+                                last_name=vip_data['last_name'],
+                                phone=vip_data['phone'],
+                                email=email,
+                                user=None  # Attach user if exists
+                            )    
 
                 # After successful customer migration, redirect to set credentials page
-                return redirect('mainapp:set_credentials')
+                return redirect('mainapp:set_credentials',email=email)
 
             else:
                 messages.error(request, 'Invalid OTP. Please try again.')
@@ -224,18 +253,18 @@ def verify_otp_view(request):
     
     return render(request, 'VIP/verify_otp.html', {'form': form})
 
-def set_credentials_view(request):
-    email = request.session.get('email')
+def set_credentials_view(request,email):
+    # email = request.session.get('email')
     
-    if not email:
-        messages.error(request, 'Session expired. Please complete the process again.')
-        return redirect('mainapp:credentials_view')
+    # if not email:
+    #     messages.error(request, 'Session expired. Please complete the process again.')
+    #     return redirect('mainapp:vip_credentials')  # Ensure this is correct
 
     try:
         vip_customer = VIPCustomer.objects.get(email=email)
     except VIPCustomer.DoesNotExist:
         messages.error(request, 'VIP Customer not found. Please complete the registration process.')
-        return redirect('mainapp:credentials_view')
+        return redirect('mainapp:vip_credentials')  # Ensure this is correct
 
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -250,10 +279,13 @@ def set_credentials_view(request):
             vip_customer.user = user
             vip_customer.save()
 
+            # if customer_instance:
+            #     customer_instance.delete()
+
             # Log in the user and redirect to VIP profile or home page
             login(request, user)
             messages.success(request, "Credentials successfully set. Welcome to the VIP section!")
-            return redirect('mainapp:vip_userprofile_')
+            return redirect('mainapp:vip_userprofile_')  # Ensure this is correct
     else:
         form = UserCreationForm()  # Present an empty form if not POST
 
@@ -287,47 +319,44 @@ class VIPCustomerLoginView(FormView):
         uname = form.cleaned_data.get("username")
         pword = form.cleaned_data.get("password")
         vipuser = authenticate(username=uname, password=pword)
+        
         if vipuser is not None and VIPCustomer.objects.filter(user=vipuser).exists():
             login(self.request, vipuser)
 
             # Store custom session data
             self.request.session['user_id'] = vipuser.id  # Changed to user_id for consistency
             self.request.session['email'] = vipuser.email
+            
+            return super().form_valid(form)
         else:
-            return render(self.request, self.template_name, {"form": self.form_class(), "error": "Invalid credentials"})
-
-        return super().form_valid(form)
+            form.add_error(None, "Invalid credentials or you are not a VIP customer.")
+            return self.form_invalid(form)
 
     def get_success_url(self):
-        if "next" in self.request.GET:
-            next_url = self.request.GET.get("next")
-            return next_url
-        else:
-            return self.success_url
-
+        next_url = self.request.GET.get("next")
+        return next_url if next_url else self.success_url
 
 class VIPUserProfileView(LoginRequiredMixin, View):
     template_name = "VIP/vip_user_profile.html"
 
     def get(self, request):
-        # Retrieve session data
-        user_id = request.session.get('user_id')  # Consistent with what is stored in the session
-        email = request.session.get('email')
+        # Fetch the currently logged-in user
+        user = request.user
 
-        # Optional: Fetch VIP customer data based on the session data
+        # Try to fetch the VIPCustomer linked to this user
         try:
-            VIPcustomer = VIPCustomer.objects.get(user__id=user_id)
+            VIPcustomer = VIPCustomer.objects.get(user=user)
         except VIPCustomer.DoesNotExist:
             VIPcustomer = None
 
-        # Pass the session data and customer info to the template
+        # Pass the VIP customer info and user data to the template
         return render(request, self.template_name, {
-            'user_id': user_id,
-            'email': email,
-            'VIPcustomer': VIPcustomer,  # Include VIP customer info
+            'VIPcustomer': VIPcustomer,
+            'user': user  # Pass the user to the template
         })
+
 
 
 def VIPCustomerLogoutView(request):
     logout(request)
-    return redirect('mainapp:vip_index')
+    return redirect(request,'VIP/VIP.html')
