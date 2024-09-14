@@ -159,7 +159,7 @@ h3.text-center {
 .gallery-images img {
     max-width: 100%; /* Ensure images fit within the slide width */
     max-height: 100%; /* Ensure images fit within the slide height */
-    object-fit: contain; /* Ensure the image is fully visible and maintains aspect ratio */
+    object-fit: cover; /* Ensure the image is fully visible and maintains aspect ratio */
     display: block;
 }
 
