@@ -18,12 +18,11 @@
 <body>
 
         {% block content %}
-        {% load static %}
 
       <header class="header">
           <div class="row">
               <div class="col-md-12 text-center">
-         <a class="logo"><img src="{% static 'logo.png' %}" alt="logo"></a>
+         <a class="logo"><img src="/mainapp/static/img/logo.png" alt="logo"></a>
          </div>
               <div class="col-md-12 text-center">
                   <button type="button" onclick="window.location.href=' add_reservation'" class="btn btn-outline-light btn-lg"><em>Make a Reservation Now!</em></button>
