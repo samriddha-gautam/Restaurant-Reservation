@@ -136,8 +136,8 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True  
 
 # Email account credentials
-EMAIL_HOST_USER = 'thedrizzhotel69@gmail.com'  
-EMAIL_HOST_PASSWORD = 'vezo umcx fuxu mxzc'  
+EMAIL_HOST_USER = '******@***.****'  
+EMAIL_HOST_PASSWORD = '***********'  
 
 # Default "from" email address
-DEFAULT_FROM_EMAIL = 'thedizzhotel69@gmail.com' 
+DEFAULT_FROM_EMAIL = '******@***.****' 
