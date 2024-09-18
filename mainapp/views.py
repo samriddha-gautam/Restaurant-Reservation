@@ -26,8 +26,8 @@ def gallery(request):
     return render(request, 'users/gallery.html')
 def find_us(request):
     return render(request, 'users/find_us.html')
-# def vip_index(request):
-#     return render(request, 'users/VIP.html')
+def vip_index(request):
+    return render(request, 'VIP/VIP.html')
 
 
 def registration_success(request):

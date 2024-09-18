@@ -19,6 +19,7 @@ urlpatterns = [
     path('reservation-success/', views.reservation_success, name='reservation_success'),
 
     # VIP-related paths
+    path('vip-homepage/',views.vip_index,name='vip_homepage'),
     path('vip-credentials',views.credentials_view,name='vip_credentials'),
     path('verify-otp/', views.verify_otp_view, name='verify_otp'),
     path('set-credentials/<str:email>/', views.set_credentials_view, name='set_credentials'),
